@@ -1,4 +1,4 @@
-package com.example.theerawuth_p.kotlin_mvvm_starter.datamodel
+package com.example.theerawuth_p.kotlin_mvvm_starter.repository
 
 import com.example.theerawuth_p.kotlin_mvvm_starter.datamodel.api.UserApi
 import com.example.theerawuth_p.kotlin_mvvm_starter.datamodel.data.User
@@ -8,7 +8,7 @@ import timber.log.Timber
 /**
  * Created by theerawuth_p on 10/17/2017 AD.
  */
-class UserDataModel(val userApi: UserApi) {
+class UserRepository(val userApi: UserApi) {
 
     var cachedUsers = emptyList<User>()
 

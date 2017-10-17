@@ -1,8 +1,7 @@
 package com.example.theerawuth_p.kotlin_mvvm_starter
 
 import android.app.Application
-import android.support.multidex.MultiDexApplication
-import com.example.theerawuth_p.kotlin_mvvm_starter.datamodel.UserDataModel
+import com.example.theerawuth_p.kotlin_mvvm_starter.repository.UserRepository
 import com.example.theerawuth_p.kotlin_mvvm_starter.datamodel.api.UserApi
 import com.example.theerawuth_p.kotlin_mvvm_starter.viewmodel.UserListViewModel
 import retrofit2.Retrofit
@@ -18,7 +17,7 @@ class MainApplication : Application() {
     companion object {
         private lateinit var retrofit: Retrofit
         private lateinit var userApi: UserApi
-        private lateinit var userDataModel: UserDataModel
+        private lateinit var userRepository: UserRepository
         private lateinit var userListViewModel: UserListViewModel
 
         fun injectUserApi() = userApi
@@ -37,8 +36,8 @@ class MainApplication : Application() {
                 .build()
 
         userApi = retrofit.create(UserApi::class.java)
-        userDataModel = UserDataModel(userApi)
-        userListViewModel = UserListViewModel(userDataModel)
+        userRepository = UserRepository(userApi)
+        userListViewModel = UserListViewModel(userRepository)
 
     }
 }
