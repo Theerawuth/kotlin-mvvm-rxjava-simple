@@ -3,9 +3,11 @@ package com.example.theerawuth_p.kotlin_mvvm_starter
 import com.example.theerawuth_p.kotlin_mvvm_starter.datamodel.api.UserApi
 import com.example.theerawuth_p.kotlin_mvvm_starter.datamodel.data.User
 import com.example.theerawuth_p.kotlin_mvvm_starter.repository.UserRepository
+import com.example.theerawuth_p.kotlin_mvvm_starter.repository.db.UserDao
 import com.nhaarman.mockito_kotlin.mock
 import io.reactivex.Observable
 import io.reactivex.Observer
+import io.reactivex.Single
 import org.mockito.Mockito.`when`
 
 import org.junit.Before
@@ -23,11 +25,14 @@ class UserRepositoryTest {
 
     lateinit var userRepository: UserRepository
     lateinit var userApi: UserApi
+    lateinit var userDao: UserDao
 
     @Before
     fun setup() {
         userApi = mock()
-        userRepository = UserRepository(userApi)
+        userDao = mock()
+        `when`(userDao.getUsers()).thenReturn(Single.just(emptyList()))
+        userRepository = UserRepository(userApi, userDao)
     }
 
     @Test
